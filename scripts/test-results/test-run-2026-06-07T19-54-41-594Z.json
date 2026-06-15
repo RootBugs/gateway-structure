@@ -1,0 +1,290 @@
+{
+  "timestamp": "2026-06-07T19:54:41.594Z",
+  "gatewayUrl": "http://localhost:3001",
+  "summary": {
+    "totalTests": 20,
+    "passed": 19,
+    "failed": 1,
+    "phases": 4
+  },
+  "phases": [
+    {
+      "name": "Phase 1: Normal Routing",
+      "scenario": "All providers enabled",
+      "results": [
+        {
+          "alias": "coder-fast",
+          "status": "FAIL",
+          "error": "This operation was aborted",
+          "latencyMs": 15015,
+          "timestamp": "2026-06-07T19:52:18.834Z"
+        },
+        {
+          "alias": "coder-smart",
+          "status": "PASS",
+          "provider": "coder-smart",
+          "content": "ok",
+          "latencyMs": 4713,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 97,
+            "total_tokens": 109
+          },
+          "timestamp": "2026-06-07T19:52:24.052Z"
+        },
+        {
+          "alias": "reasoning",
+          "status": "PASS",
+          "provider": "reasoning",
+          "content": "ok",
+          "latencyMs": 6279,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 180,
+            "total_tokens": 192
+          },
+          "timestamp": "2026-06-07T19:52:30.838Z"
+        },
+        {
+          "alias": "architect",
+          "status": "PASS",
+          "provider": "architect",
+          "content": "ok",
+          "latencyMs": 5260,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 25,
+            "total_tokens": 37
+          },
+          "timestamp": "2026-06-07T19:52:36.603Z"
+        },
+        {
+          "alias": "deep-research",
+          "status": "PASS",
+          "provider": "deep-research",
+          "content": "ok",
+          "latencyMs": 4447,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 17,
+            "total_tokens": 29
+          },
+          "timestamp": "2026-06-07T19:52:41.552Z"
+        }
+      ]
+    },
+    {
+      "name": "Phase 2: Failover",
+      "scenario": "Groq + Gemini disabled",
+      "results": [
+        {
+          "alias": "coder-fast",
+          "status": "PASS",
+          "provider": "coder-fast",
+          "content": "ok",
+          "latencyMs": 3807,
+          "usage": {
+            "prompt_tokens": 74,
+            "completion_tokens": 61,
+            "total_tokens": 135
+          },
+          "timestamp": "2026-06-07T19:52:49.433Z"
+        },
+        {
+          "alias": "coder-smart",
+          "status": "PASS",
+          "provider": "coder-smart",
+          "content": "ok",
+          "latencyMs": 7773,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 150,
+            "total_tokens": 162
+          },
+          "timestamp": "2026-06-07T19:52:57.718Z"
+        },
+        {
+          "alias": "reasoning",
+          "status": "PASS",
+          "provider": "reasoning",
+          "content": "ok",
+          "latencyMs": 5603,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 91,
+            "total_tokens": 103
+          },
+          "timestamp": "2026-06-07T19:53:03.837Z"
+        },
+        {
+          "alias": "architect",
+          "status": "PASS",
+          "provider": "architect",
+          "content": "",
+          "latencyMs": 24050,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 256,
+            "total_tokens": 268
+          },
+          "timestamp": "2026-06-07T19:53:28.388Z"
+        },
+        {
+          "alias": "deep-research",
+          "status": "PASS",
+          "provider": "deep-research",
+          "content": "ok",
+          "latencyMs": 3791,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 127,
+            "total_tokens": 139
+          },
+          "timestamp": "2026-06-07T19:53:32.687Z"
+        }
+      ]
+    },
+    {
+      "name": "Phase 3: Extreme Failover",
+      "scenario": "OpenRouter only",
+      "results": [
+        {
+          "alias": "coder-fast",
+          "status": "PASS",
+          "provider": "coder-fast",
+          "content": "Ok",
+          "latencyMs": 4458,
+          "usage": {
+            "prompt_tokens": 14,
+            "completion_tokens": 1,
+            "total_tokens": 15
+          },
+          "timestamp": "2026-06-07T19:53:43.231Z"
+        },
+        {
+          "alias": "coder-smart",
+          "status": "PASS",
+          "provider": "coder-smart",
+          "content": "ok",
+          "latencyMs": 4025,
+          "usage": {
+            "prompt_tokens": 14,
+            "completion_tokens": 4,
+            "total_tokens": 18
+          },
+          "timestamp": "2026-06-07T19:53:47.774Z"
+        },
+        {
+          "alias": "reasoning",
+          "status": "PASS",
+          "provider": "reasoning",
+          "content": "ok",
+          "latencyMs": 4818,
+          "usage": {
+            "prompt_tokens": 14,
+            "completion_tokens": 4,
+            "total_tokens": 18
+          },
+          "timestamp": "2026-06-07T19:53:53.109Z"
+        },
+        {
+          "alias": "architect",
+          "status": "PASS",
+          "provider": "architect",
+          "content": "ok",
+          "latencyMs": 5982,
+          "usage": {
+            "prompt_tokens": 14,
+            "completion_tokens": 4,
+            "total_tokens": 18
+          },
+          "timestamp": "2026-06-07T19:53:59.593Z"
+        },
+        {
+          "alias": "deep-research",
+          "status": "PASS",
+          "provider": "deep-research",
+          "content": "ok",
+          "latencyMs": 6393,
+          "usage": {
+            "prompt_tokens": 8,
+            "completion_tokens": 1,
+            "total_tokens": 9
+          },
+          "timestamp": "2026-06-07T19:54:06.495Z"
+        }
+      ]
+    },
+    {
+      "name": "Phase 4: Single Provider",
+      "scenario": "Cerebras only",
+      "results": [
+        {
+          "alias": "coder-fast",
+          "status": "PASS",
+          "provider": "coder-fast",
+          "content": "ok",
+          "latencyMs": 3466,
+          "usage": {
+            "prompt_tokens": 74,
+            "completion_tokens": 64,
+            "total_tokens": 138
+          },
+          "timestamp": "2026-06-07T19:54:15.918Z"
+        },
+        {
+          "alias": "coder-smart",
+          "status": "PASS",
+          "provider": "coder-smart",
+          "content": "",
+          "latencyMs": 4257,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 256,
+            "total_tokens": 268
+          },
+          "timestamp": "2026-06-07T19:54:20.685Z"
+        },
+        {
+          "alias": "reasoning",
+          "status": "PASS",
+          "provider": "reasoning",
+          "content": "ok",
+          "latencyMs": 3754,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 109,
+            "total_tokens": 121
+          },
+          "timestamp": "2026-06-07T19:54:24.946Z"
+        },
+        {
+          "alias": "architect",
+          "status": "PASS",
+          "provider": "architect",
+          "content": "ok",
+          "latencyMs": 4081,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 180,
+            "total_tokens": 192
+          },
+          "timestamp": "2026-06-07T19:54:29.534Z"
+        },
+        {
+          "alias": "deep-research",
+          "status": "PASS",
+          "provider": "deep-research",
+          "content": "ok",
+          "latencyMs": 3483,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 93,
+            "total_tokens": 105
+          },
+          "timestamp": "2026-06-07T19:54:33.528Z"
+        }
+      ]
+    }
+  ]
+}

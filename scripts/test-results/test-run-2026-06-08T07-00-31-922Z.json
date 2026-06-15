@@ -1,0 +1,242 @@
+{
+  "timestamp": "2026-06-08T07:00:31.922Z",
+  "gatewayUrl": "http://localhost:3000",
+  "summary": {
+    "totalTests": 20,
+    "passed": 11,
+    "failed": 9,
+    "phases": 4
+  },
+  "phases": [
+    {
+      "name": "Phase 1: Normal Routing",
+      "scenario": "All providers enabled",
+      "results": [
+        {
+          "alias": "coder-fast",
+          "status": "FAIL",
+          "error": "This operation was aborted",
+          "latencyMs": 15004,
+          "timestamp": "2026-06-08T06:55:52.780Z"
+        },
+        {
+          "alias": "coder-smart",
+          "status": "PASS",
+          "provider": "coder-smart",
+          "content": "ok",
+          "latencyMs": 11992,
+          "usage": {
+            "prompt_tokens": 17,
+            "completion_tokens": 2,
+            "total_tokens": 19
+          },
+          "timestamp": "2026-06-08T06:56:05.276Z"
+        },
+        {
+          "alias": "reasoning",
+          "status": "PASS",
+          "provider": "reasoning",
+          "content": "ok",
+          "latencyMs": 15067,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 152,
+            "total_tokens": 164
+          },
+          "timestamp": "2026-06-08T06:56:20.845Z"
+        },
+        {
+          "alias": "architect",
+          "status": "PASS",
+          "provider": "architect",
+          "content": "ok",
+          "latencyMs": 15054,
+          "usage": {
+            "prompt_tokens": 42,
+            "completion_tokens": 1,
+            "total_tokens": 43
+          },
+          "timestamp": "2026-06-08T06:56:36.401Z"
+        },
+        {
+          "alias": "deep-research",
+          "status": "PASS",
+          "provider": "deep-research",
+          "content": "ok",
+          "latencyMs": 16111,
+          "usage": {
+            "prompt_tokens": 258,
+            "completion_tokens": 27,
+            "total_tokens": 285
+          },
+          "timestamp": "2026-06-08T06:56:53.014Z"
+        }
+      ]
+    },
+    {
+      "name": "Phase 2: Failover",
+      "scenario": "Groq + Gemini disabled",
+      "results": [
+        {
+          "alias": "coder-fast",
+          "status": "FAIL",
+          "error": "This operation was aborted",
+          "latencyMs": 15002,
+          "timestamp": "2026-06-08T06:57:12.644Z"
+        },
+        {
+          "alias": "coder-smart",
+          "status": "FAIL",
+          "error": "This operation was aborted",
+          "latencyMs": 15001,
+          "timestamp": "2026-06-08T06:57:28.146Z"
+        },
+        {
+          "alias": "reasoning",
+          "status": "PASS",
+          "provider": "reasoning",
+          "content": "ok",
+          "latencyMs": 14062,
+          "usage": {
+            "prompt_tokens": 42,
+            "completion_tokens": 1,
+            "total_tokens": 43
+          },
+          "timestamp": "2026-06-08T06:57:42.711Z"
+        },
+        {
+          "alias": "architect",
+          "status": "PASS",
+          "provider": "architect",
+          "content": "ok",
+          "latencyMs": 12991,
+          "usage": {
+            "prompt_tokens": 42,
+            "completion_tokens": 1,
+            "total_tokens": 43
+          },
+          "timestamp": "2026-06-08T06:57:56.204Z"
+        },
+        {
+          "alias": "deep-research",
+          "status": "PASS",
+          "provider": "deep-research",
+          "content": "ok",
+          "latencyMs": 13887,
+          "usage": {
+            "prompt_tokens": 42,
+            "completion_tokens": 1,
+            "total_tokens": 43
+          },
+          "timestamp": "2026-06-08T06:58:10.594Z"
+        }
+      ]
+    },
+    {
+      "name": "Phase 3: Extreme Failover",
+      "scenario": "OpenRouter only",
+      "results": [
+        {
+          "alias": "coder-fast",
+          "status": "FAIL",
+          "error": "Failed to route request: No eligible provider found for request",
+          "latencyMs": 6330,
+          "timestamp": "2026-06-08T06:58:23.528Z"
+        },
+        {
+          "alias": "coder-smart",
+          "status": "FAIL",
+          "error": "Failed to route request: No eligible provider found for request",
+          "latencyMs": 5561,
+          "timestamp": "2026-06-08T06:58:29.589Z"
+        },
+        {
+          "alias": "reasoning",
+          "status": "FAIL",
+          "error": "Failed to route request: No eligible provider found for request",
+          "latencyMs": 6245,
+          "timestamp": "2026-06-08T06:58:36.336Z"
+        },
+        {
+          "alias": "architect",
+          "status": "FAIL",
+          "error": "Failed to route request: No eligible provider found for request",
+          "latencyMs": 6325,
+          "timestamp": "2026-06-08T06:58:43.163Z"
+        },
+        {
+          "alias": "deep-research",
+          "status": "FAIL",
+          "error": "Failed to route request: No eligible provider found for request",
+          "latencyMs": 6281,
+          "timestamp": "2026-06-08T06:58:49.947Z"
+        }
+      ]
+    },
+    {
+      "name": "Phase 4: Single Provider",
+      "scenario": "Cerebras only",
+      "results": [
+        {
+          "alias": "coder-fast",
+          "status": "PASS",
+          "provider": "coder-fast",
+          "content": "ok",
+          "latencyMs": 12266,
+          "usage": {
+            "prompt_tokens": 74,
+            "completion_tokens": 35,
+            "total_tokens": 109
+          },
+          "timestamp": "2026-06-08T06:59:08.485Z"
+        },
+        {
+          "alias": "coder-smart",
+          "status": "FAIL",
+          "error": "This operation was aborted",
+          "latencyMs": 15008,
+          "timestamp": "2026-06-08T06:59:23.996Z"
+        },
+        {
+          "alias": "reasoning",
+          "status": "PASS",
+          "provider": "reasoning",
+          "content": "ok",
+          "latencyMs": 19261,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 123,
+            "total_tokens": 135
+          },
+          "timestamp": "2026-06-08T06:59:43.759Z"
+        },
+        {
+          "alias": "architect",
+          "status": "PASS",
+          "provider": "architect",
+          "content": "ok",
+          "latencyMs": 17830,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 181,
+            "total_tokens": 193
+          },
+          "timestamp": "2026-06-08T07:00:02.090Z"
+        },
+        {
+          "alias": "deep-research",
+          "status": "PASS",
+          "provider": "deep-research",
+          "content": "ok",
+          "latencyMs": 19066,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 111,
+            "total_tokens": 123
+          },
+          "timestamp": "2026-06-08T07:00:21.657Z"
+        }
+      ]
+    }
+  ]
+}

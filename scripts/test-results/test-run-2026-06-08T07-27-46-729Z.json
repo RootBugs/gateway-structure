@@ -1,0 +1,272 @@
+{
+  "timestamp": "2026-06-08T07:27:46.729Z",
+  "gatewayUrl": "http://localhost:3000",
+  "summary": {
+    "totalTests": 20,
+    "passed": 16,
+    "failed": 4,
+    "phases": 4
+  },
+  "phases": [
+    {
+      "name": "Phase 1: Normal Routing",
+      "scenario": "All providers enabled",
+      "results": [
+        {
+          "alias": "coder-fast",
+          "status": "FAIL",
+          "error": "This operation was aborted",
+          "latencyMs": 15003,
+          "timestamp": "2026-06-08T07:22:44.179Z"
+        },
+        {
+          "alias": "coder-smart",
+          "status": "PASS",
+          "provider": "coder-smart",
+          "content": "ok",
+          "latencyMs": 12839,
+          "usage": {
+            "prompt_tokens": 17,
+            "completion_tokens": 2,
+            "total_tokens": 19
+          },
+          "timestamp": "2026-06-08T07:22:57.523Z"
+        },
+        {
+          "alias": "reasoning",
+          "status": "PASS",
+          "provider": "reasoning",
+          "content": "<think>\nOkay, the user wants me to just reply with \"ok\". Let me make sure there's no additional context or hidden request here. They specified one word, so I should keep it simple. No need for any extra text. I'll just send \"ok\".\n</think>\n\nok",
+          "latencyMs": 11354,
+          "usage": {
+            "prompt_tokens": 15,
+            "completion_tokens": 59,
+            "total_tokens": 74
+          },
+          "timestamp": "2026-06-08T07:23:09.378Z"
+        },
+        {
+          "alias": "architect",
+          "status": "PASS",
+          "provider": "architect",
+          "content": "<think>\nOkay, the user asked me to just reply with one word: ok. Let me make sure I understand correctly. They want a response that's only the word \"ok\". No extra text, just that one word. I need to check if there's any hidden instruction or if they're testing something. Since the query is straightforward and in English, the appropriate response is to say \"ok\" as requested. I shouldn't add any explanations or other words. Let me confirm once more. They said \"just reply with one word: ok\". So yes, the correct reply is \"ok\".\n</think>\n\nok",
+          "latencyMs": 11807,
+          "usage": {
+            "prompt_tokens": 15,
+            "completion_tokens": 125,
+            "total_tokens": 140
+          },
+          "timestamp": "2026-06-08T07:23:21.688Z"
+        },
+        {
+          "alias": "deep-research",
+          "status": "PASS",
+          "provider": "deep-research",
+          "content": "ok",
+          "latencyMs": 13109,
+          "usage": {
+            "prompt_tokens": 17,
+            "completion_tokens": 2,
+            "total_tokens": 19
+          },
+          "timestamp": "2026-06-08T07:23:35.301Z"
+        }
+      ]
+    },
+    {
+      "name": "Phase 2: Failover",
+      "scenario": "Groq + Gemini disabled",
+      "results": [
+        {
+          "alias": "coder-fast",
+          "status": "FAIL",
+          "error": "This operation was aborted",
+          "latencyMs": 15002,
+          "timestamp": "2026-06-08T07:23:55.404Z"
+        },
+        {
+          "alias": "coder-smart",
+          "status": "PASS",
+          "provider": "coder-smart",
+          "content": "ok",
+          "latencyMs": 14182,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 110,
+            "total_tokens": 122
+          },
+          "timestamp": "2026-06-08T07:24:10.088Z"
+        },
+        {
+          "alias": "reasoning",
+          "status": "PASS",
+          "provider": "reasoning",
+          "content": "ok",
+          "latencyMs": 14584,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 102,
+            "total_tokens": 114
+          },
+          "timestamp": "2026-06-08T07:24:25.172Z"
+        },
+        {
+          "alias": "architect",
+          "status": "PASS",
+          "provider": "architect",
+          "content": "ok",
+          "latencyMs": 13699,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 180,
+            "total_tokens": 192
+          },
+          "timestamp": "2026-06-08T07:24:39.373Z"
+        },
+        {
+          "alias": "deep-research",
+          "status": "PASS",
+          "provider": "deep-research",
+          "content": "ok",
+          "latencyMs": 13157,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 93,
+            "total_tokens": 105
+          },
+          "timestamp": "2026-06-08T07:24:53.032Z"
+        }
+      ]
+    },
+    {
+      "name": "Phase 3: Extreme Failover",
+      "scenario": "OpenRouter only",
+      "results": [
+        {
+          "alias": "coder-fast",
+          "status": "FAIL",
+          "error": "This operation was aborted",
+          "latencyMs": 15001,
+          "timestamp": "2026-06-08T07:25:15.744Z"
+        },
+        {
+          "alias": "coder-smart",
+          "status": "PASS",
+          "provider": "coder-smart",
+          "content": "ok",
+          "latencyMs": 14393,
+          "usage": {
+            "prompt_tokens": 108,
+            "completion_tokens": 2,
+            "total_tokens": 110
+          },
+          "timestamp": "2026-06-08T07:25:30.638Z"
+        },
+        {
+          "alias": "reasoning",
+          "status": "PASS",
+          "provider": "reasoning",
+          "content": "ok",
+          "latencyMs": 19318,
+          "usage": {
+            "prompt_tokens": 108,
+            "completion_tokens": 2,
+            "total_tokens": 110
+          },
+          "timestamp": "2026-06-08T07:25:50.458Z"
+        },
+        {
+          "alias": "architect",
+          "status": "PASS",
+          "provider": "architect",
+          "content": "ok",
+          "latencyMs": 14232,
+          "usage": {
+            "prompt_tokens": 108,
+            "completion_tokens": 2,
+            "total_tokens": 110
+          },
+          "timestamp": "2026-06-08T07:26:05.191Z"
+        },
+        {
+          "alias": "deep-research",
+          "status": "PASS",
+          "provider": "deep-research",
+          "content": "ok",
+          "latencyMs": 13866,
+          "usage": {
+            "prompt_tokens": 108,
+            "completion_tokens": 2,
+            "total_tokens": 110
+          },
+          "timestamp": "2026-06-08T07:26:19.558Z"
+        }
+      ]
+    },
+    {
+      "name": "Phase 4: Single Provider",
+      "scenario": "Cerebras only",
+      "results": [
+        {
+          "alias": "coder-fast",
+          "status": "FAIL",
+          "error": "This operation was aborted",
+          "latencyMs": 15003,
+          "timestamp": "2026-06-08T07:26:41.986Z"
+        },
+        {
+          "alias": "coder-smart",
+          "status": "PASS",
+          "provider": "coder-smart",
+          "content": "",
+          "latencyMs": 13484,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 256,
+            "total_tokens": 268
+          },
+          "timestamp": "2026-06-08T07:26:55.971Z"
+        },
+        {
+          "alias": "reasoning",
+          "status": "PASS",
+          "provider": "reasoning",
+          "content": "ok",
+          "latencyMs": 12674,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 106,
+            "total_tokens": 118
+          },
+          "timestamp": "2026-06-08T07:27:09.149Z"
+        },
+        {
+          "alias": "architect",
+          "status": "PASS",
+          "provider": "architect",
+          "content": "ok",
+          "latencyMs": 12294,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 101,
+            "total_tokens": 113
+          },
+          "timestamp": "2026-06-08T07:27:21.943Z"
+        },
+        {
+          "alias": "deep-research",
+          "status": "PASS",
+          "provider": "deep-research",
+          "content": "ok",
+          "latencyMs": 15636,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 114,
+            "total_tokens": 126
+          },
+          "timestamp": "2026-06-08T07:27:38.081Z"
+        }
+      ]
+    }
+  ]
+}

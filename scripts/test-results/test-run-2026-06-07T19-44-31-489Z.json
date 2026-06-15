@@ -1,0 +1,296 @@
+{
+  "timestamp": "2026-06-07T19:44:31.489Z",
+  "gatewayUrl": "http://localhost:3000",
+  "summary": {
+    "totalTests": 20,
+    "passed": 20,
+    "failed": 0,
+    "phases": 4
+  },
+  "phases": [
+    {
+      "name": "Phase 1: Normal Routing",
+      "scenario": "All providers enabled",
+      "results": [
+        {
+          "alias": "coder-fast",
+          "status": "PASS",
+          "provider": "coder-fast",
+          "content": "ok",
+          "latencyMs": 12808,
+          "usage": {
+            "prompt_tokens": 74,
+            "completion_tokens": 38,
+            "total_tokens": 112
+          },
+          "timestamp": "2026-06-07T19:42:19.613Z"
+        },
+        {
+          "alias": "coder-smart",
+          "status": "PASS",
+          "provider": "coder-smart",
+          "content": "ok",
+          "latencyMs": 11171,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 173,
+            "total_tokens": 185
+          },
+          "timestamp": "2026-06-07T19:42:31.288Z"
+        },
+        {
+          "alias": "reasoning",
+          "status": "PASS",
+          "provider": "reasoning",
+          "content": "ok",
+          "latencyMs": 4006,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 85,
+            "total_tokens": 97
+          },
+          "timestamp": "2026-06-07T19:42:35.810Z"
+        },
+        {
+          "alias": "architect",
+          "status": "PASS",
+          "provider": "architect",
+          "content": "ok",
+          "latencyMs": 4573,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 134,
+            "total_tokens": 146
+          },
+          "timestamp": "2026-06-07T19:42:40.887Z"
+        },
+        {
+          "alias": "deep-research",
+          "status": "PASS",
+          "provider": "deep-research",
+          "content": "ok",
+          "latencyMs": 4152,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 85,
+            "total_tokens": 97
+          },
+          "timestamp": "2026-06-07T19:42:45.554Z"
+        }
+      ]
+    },
+    {
+      "name": "Phase 2: Failover",
+      "scenario": "Groq + Gemini disabled",
+      "results": [
+        {
+          "alias": "coder-fast",
+          "status": "PASS",
+          "provider": "coder-fast",
+          "content": "ok",
+          "latencyMs": 4577,
+          "usage": {
+            "prompt_tokens": 74,
+            "completion_tokens": 35,
+            "total_tokens": 109
+          },
+          "timestamp": "2026-06-07T19:42:54.088Z"
+        },
+        {
+          "alias": "coder-smart",
+          "status": "PASS",
+          "provider": "coder-smart",
+          "content": "ok",
+          "latencyMs": 4461,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 115,
+            "total_tokens": 127
+          },
+          "timestamp": "2026-06-07T19:42:59.066Z"
+        },
+        {
+          "alias": "reasoning",
+          "status": "PASS",
+          "provider": "reasoning",
+          "content": "ok",
+          "latencyMs": 4588,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 240,
+            "total_tokens": 252
+          },
+          "timestamp": "2026-06-07T19:43:04.161Z"
+        },
+        {
+          "alias": "architect",
+          "status": "PASS",
+          "provider": "architect",
+          "content": "ok",
+          "latencyMs": 6046,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 74,
+            "total_tokens": 86
+          },
+          "timestamp": "2026-06-07T19:43:10.713Z"
+        },
+        {
+          "alias": "deep-research",
+          "status": "PASS",
+          "provider": "deep-research",
+          "content": "ok",
+          "latencyMs": 5097,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 62,
+            "total_tokens": 74
+          },
+          "timestamp": "2026-06-07T19:43:16.319Z"
+        }
+      ]
+    },
+    {
+      "name": "Phase 3: Extreme Failover",
+      "scenario": "OpenRouter only",
+      "results": [
+        {
+          "alias": "coder-fast",
+          "status": "PASS",
+          "provider": "coder-fast",
+          "content": "Ok",
+          "latencyMs": 4922,
+          "usage": {
+            "prompt_tokens": 14,
+            "completion_tokens": 2,
+            "total_tokens": 16
+          },
+          "timestamp": "2026-06-07T19:43:29.090Z"
+        },
+        {
+          "alias": "coder-smart",
+          "status": "PASS",
+          "provider": "coder-smart",
+          "content": "ok",
+          "latencyMs": 5235,
+          "usage": {
+            "prompt_tokens": 14,
+            "completion_tokens": 4,
+            "total_tokens": 18
+          },
+          "timestamp": "2026-06-07T19:43:34.828Z"
+        },
+        {
+          "alias": "reasoning",
+          "status": "PASS",
+          "provider": "reasoning",
+          "content": "ok",
+          "latencyMs": 5565,
+          "usage": {
+            "prompt_tokens": 14,
+            "completion_tokens": 4,
+            "total_tokens": 18
+          },
+          "timestamp": "2026-06-07T19:43:40.906Z"
+        },
+        {
+          "alias": "architect",
+          "status": "PASS",
+          "provider": "architect",
+          "content": "ok",
+          "latencyMs": 5748,
+          "usage": {
+            "prompt_tokens": 14,
+            "completion_tokens": 4,
+            "total_tokens": 18
+          },
+          "timestamp": "2026-06-07T19:43:47.156Z"
+        },
+        {
+          "alias": "deep-research",
+          "status": "PASS",
+          "provider": "deep-research",
+          "content": "ok",
+          "latencyMs": 5320,
+          "usage": {
+            "prompt_tokens": 8,
+            "completion_tokens": 1,
+            "total_tokens": 9
+          },
+          "timestamp": "2026-06-07T19:43:52.985Z"
+        }
+      ]
+    },
+    {
+      "name": "Phase 4: Single Provider",
+      "scenario": "Cerebras only",
+      "results": [
+        {
+          "alias": "coder-fast",
+          "status": "PASS",
+          "provider": "coder-fast",
+          "content": "ok",
+          "latencyMs": 3809,
+          "usage": {
+            "prompt_tokens": 74,
+            "completion_tokens": 63,
+            "total_tokens": 137
+          },
+          "timestamp": "2026-06-07T19:44:05.207Z"
+        },
+        {
+          "alias": "coder-smart",
+          "status": "PASS",
+          "provider": "coder-smart",
+          "content": "ok",
+          "latencyMs": 3679,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 215,
+            "total_tokens": 227
+          },
+          "timestamp": "2026-06-07T19:44:09.400Z"
+        },
+        {
+          "alias": "reasoning",
+          "status": "PASS",
+          "provider": "reasoning",
+          "content": "ok",
+          "latencyMs": 3976,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 43,
+            "total_tokens": 55
+          },
+          "timestamp": "2026-06-07T19:44:13.887Z"
+        },
+        {
+          "alias": "architect",
+          "status": "PASS",
+          "provider": "architect",
+          "content": "ok",
+          "latencyMs": 3545,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 245,
+            "total_tokens": 257
+          },
+          "timestamp": "2026-06-07T19:44:17.947Z"
+        },
+        {
+          "alias": "deep-research",
+          "status": "PASS",
+          "provider": "deep-research",
+          "content": "ok",
+          "latencyMs": 4229,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 112,
+            "total_tokens": 124
+          },
+          "timestamp": "2026-06-07T19:44:22.691Z"
+        }
+      ]
+    }
+  ]
+}

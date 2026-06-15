@@ -1,0 +1,301 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ============================================================================
+// Table: users
+// Purpose: Team member accounts. Private team only.
+// Volume: 2-10 rows
+// ============================================================================
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique @db.VarChar(255)
+  passwordHash String   @map("password_hash") @db.VarChar(255)
+  name             String?   @db.VarChar(255)
+  role             String    @default("member") @db.VarChar(20)
+  termsAcceptedAt  DateTime? @map("terms_accepted_at")
+  createdAt        DateTime  @default(now()) @map("created_at")
+  updatedAt        DateTime  @updatedAt @map("updated_at")
+
+  apiKeys       ApiKey[]
+  sessions      Session[]
+  conversations Conversation[]
+
+  @@index([email])
+  @@index([role])
+  @@map("users")
+}
+
+// ============================================================================
+// Table: api_keys
+// Purpose: Team API keys for client authentication. Hashed with bcrypt.
+// Volume: 10-50 rows
+// ============================================================================
+model ApiKey {
+  id         String    @id @default(uuid())
+  userId     String    @map("user_id")
+  name       String    @db.VarChar(255)
+  keyHash    String    @unique @map("key_hash") @db.VarChar(255)
+  keyPrefix  String    @map("key_prefix") @db.VarChar(12)
+  isActive   Boolean   @default(true) @map("is_active")
+  lastUsedAt DateTime? @map("last_used_at")
+  createdAt  DateTime  @default(now()) @map("created_at")
+  revokedAt  DateTime? @map("revoked_at")
+
+  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  requestLogs RequestLog[]
+  rateLimits  RateLimit[]
+
+  @@index([userId])
+  @@index([keyHash])
+  @@index([isActive])
+  @@index([createdAt])
+  @@map("api_keys")
+}
+
+// ============================================================================
+// Table: sessions
+// Purpose: JWT session tracking for dashboard login.
+// Volume: 5-20 rows
+// ============================================================================
+model Session {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  token     String   @unique @db.VarChar(512)
+  ipAddress String?  @map("ip_address") @db.VarChar(45)
+  userAgent String?  @map("user_agent") @db.VarChar(500)
+  expiresAt DateTime @map("expires_at")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([token])
+  @@index([expiresAt])
+  @@map("sessions")
+}
+
+// ============================================================================
+// Table: conversations
+// Purpose: Session stickiness tracker. Maps conversation ID to locked provider.
+// Volume: 1,000-10,000 rows
+// ============================================================================
+model Conversation {
+  id             String    @id @default(uuid())
+  userId         String    @map("user_id")
+  sessionId      String    @unique @map("session_id") @db.VarChar(255)
+  providerId     String    @map("provider_id") @db.VarChar(50)
+  modelAlias     String    @map("model_alias") @db.VarChar(50)
+  modelFamily    String    @map("model_family") @db.VarChar(50)
+  lastModelUsed  String?   @map("last_model_used") @db.VarChar(100)
+  isActive       Boolean   @default(true) @map("is_active")
+  switchCount    Int       @default(0) @map("switch_count")
+  lastSwitchedAt DateTime? @map("last_switched_at")
+  createdAt      DateTime  @default(now()) @map("created_at")
+  updatedAt      DateTime  @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId])
+  @@index([userId])
+  @@index([providerId])
+  @@index([isActive])
+  @@index([updatedAt])
+  @@index([modelFamily])
+  @@map("conversations")
+}
+
+// ============================================================================
+// Table: providers
+// Purpose: Provider registry. Static configuration seeded on setup.
+// Volume: 11 rows (fixed)
+// ============================================================================
+model Provider {
+  id              String  @id @db.VarChar(50)
+  name            String  @unique @db.VarChar(50)
+  displayName     String  @map("display_name") @db.VarChar(100)
+  tier            String  @db.VarChar(20)
+  isEnabled       Boolean @default(true) @map("is_enabled")
+  priorityWeight  Int     @default(100) @map("priority_weight")
+  quotaLimitDaily Int     @default(1000) @map("quota_limit_daily")
+  quotaUsedToday  Int     @default(0) @map("quota_used_today")
+  baseUrl         String? @map("base_url") @db.VarChar(500)
+  apiKeyEncrypted String? @map("api_key_encrypted") @db.VarChar(1000)
+  config          Json?
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  health      ProviderHealth?
+  usage       ProviderUsage[]
+  quotaState  ProviderQuotaState?
+  requestLogs RequestLog[]
+
+  @@index([name])
+  @@index([tier])
+  @@index([isEnabled])
+  @@index([priorityWeight])
+  @@map("providers")
+}
+
+// ============================================================================
+// Table: provider_health
+// Purpose: Real-time health status per provider. Circuit breaker included.
+// Volume: 11 rows (fixed)
+// ============================================================================
+model ProviderHealth {
+  id                  String    @id @default(uuid())
+  providerId          String    @unique @map("provider_id") @db.VarChar(50)
+  status              String    @default("unknown") @db.VarChar(20)
+  latencyMs           Int       @default(0) @map("latency_ms")
+  successRate         Float     @default(0) @map("success_rate")
+  errorRate           Float     @default(0) @map("error_rate")
+  consecutiveFailures Int       @default(0) @map("consecutive_failures")
+  circuitState        String    @default("closed") @map("circuit_state") @db.VarChar(20)
+  circuitOpenedAt     DateTime? @map("circuit_opened_at")
+  lastCheckedAt       DateTime? @map("last_checked_at")
+  lastErrorAt         DateTime? @map("last_error_at")
+  lastError           String?   @map("last_error") @db.VarChar(1000)
+
+  provider Provider @relation(fields: [providerId], references: [id], onDelete: Cascade)
+
+  @@index([providerId])
+  @@index([status])
+  @@index([circuitState])
+  @@index([lastCheckedAt])
+  @@map("provider_health")
+}
+
+// ============================================================================
+// Table: provider_usage
+// Purpose: Daily quota tracking per provider. Aggregated for weighted routing.
+// Volume: ~4,015 rows/year (11 providers x 365 days)
+// ============================================================================
+model ProviderUsage {
+  id            String   @id @default(uuid())
+  providerId    String   @map("provider_id") @db.VarChar(50)
+  date          DateTime @db.Date
+  requestsCount Int      @default(0) @map("requests_count")
+  tokensIn      Int      @default(0) @map("tokens_in")
+  tokensOut     Int      @default(0) @map("tokens_out")
+  errorsCount   Int      @default(0) @map("errors_count")
+  avgLatencyMs  Int      @default(0) @map("avg_latency_ms")
+
+  provider Provider @relation(fields: [providerId], references: [id], onDelete: Cascade)
+
+  @@unique([providerId, date])
+  @@index([providerId])
+  @@index([date])
+  @@map("provider_usage")
+}
+
+// ============================================================================
+// Table: provider_quota_state
+// Purpose: Real-time quota tracking separate from daily aggregation.
+//          Updated after every request for immediate routing decisions.
+// Volume: 11 rows (fixed)
+// ============================================================================
+model ProviderQuotaState {
+  id                String   @id @default(uuid())
+  providerId        String   @unique @map("provider_id") @db.VarChar(50)
+  remainingRequests Int      @default(0) @map("remaining_requests")
+  remainingTokens   Int      @default(0) @map("remaining_tokens")
+  resetAt           DateTime @map("reset_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
+
+  provider Provider @relation(fields: [providerId], references: [id], onDelete: Cascade)
+
+  @@index([providerId])
+  @@index([resetAt])
+  @@map("provider_quota_state")
+}
+
+// ============================================================================
+// Table: request_logs
+// Purpose: Complete audit trail of every API request.
+// Volume: 100,000-1,000,000+ rows/month
+// ============================================================================
+model RequestLog {
+  id              String    @id @default(uuid())
+  requestId       String    @unique @map("request_id") @db.VarChar(255)
+  apiKeyId        String?   @map("api_key_id")
+  providerId      String?   @map("provider_id") @db.VarChar(50)
+  modelAlias      String    @map("model_alias") @db.VarChar(50)
+  modelUsed       String    @map("model_used") @db.VarChar(100)
+  modelFamily     String    @map("model_family") @db.VarChar(50)
+  providerAttempt Int       @default(1) @map("provider_attempt")
+  status          String    @db.VarChar(20)
+  tokensIn        Int       @default(0) @map("tokens_in")
+  tokensOut       Int       @default(0) @map("tokens_out")
+  latencyMs       Int       @default(0) @map("latency_ms")
+  errorMessage    String?   @map("error_message") @db.VarChar(1000)
+  sessionId       String?   @map("session_id") @db.VarChar(255)
+  streaming       Boolean   @default(false)
+  ipAddress       String?   @map("ip_address") @db.VarChar(45)
+  createdAt       DateTime  @default(now()) @map("created_at")
+
+  apiKey   ApiKey?   @relation(fields: [apiKeyId], references: [id], onDelete: SetNull)
+  provider Provider? @relation(fields: [providerId], references: [id], onDelete: SetNull)
+
+  @@index([createdAt])
+  @@index([apiKeyId, createdAt])
+  @@index([providerId])
+  @@index([sessionId])
+  @@index([status])
+  @@index([requestId])
+  @@map("request_logs")
+}
+
+// ============================================================================
+// Table: rate_limits
+// Purpose: Database-backed rate limiting. Per-API-key, per-time-window counters.
+// Volume: ~500 rows (windows expire and are cleaned)
+// ============================================================================
+model RateLimit {
+  id            String   @id @default(uuid())
+  apiKeyId      String   @map("api_key_id")
+  windowType    String   @map("window_type") @db.VarChar(20)
+  windowStart   DateTime @map("window_start")
+  requestCount  Int      @default(0) @map("request_count")
+  tokenCount    Int      @default(0) @map("token_count")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  apiKey ApiKey @relation(fields: [apiKeyId], references: [id], onDelete: Cascade)
+
+  @@unique([apiKeyId, windowType, windowStart])
+  @@index([apiKeyId])
+  @@index([windowStart])
+  @@index([windowType])
+  @@map("rate_limits")
+}
+
+// ============================================================================
+// Table: model_aliases
+// Purpose: Virtual model definitions. Static configuration seeded on setup.
+// Volume: 5 rows (fixed)
+// ============================================================================
+model ModelAlias {
+  id                  String  @id @db.VarChar(50)
+  alias               String  @unique @db.VarChar(50)
+  displayName         String  @map("display_name") @db.VarChar(100)
+  description         String? @db.VarChar(500)
+  routingStrategy     String  @default("best_score") @map("routing_strategy") @db.VarChar(20)
+  preferredProviders  Json    @map("preferred_providers")
+  fallbackProviders   Json    @map("fallback_providers")
+  maxTokens           Int     @default(4096) @map("max_tokens")
+  temperature         Float   @default(0.7)
+  systemPrompt        String? @map("system_prompt") @db.VarChar(2000)
+  isActive            Boolean @default(true) @map("is_active")
+  createdAt           DateTime @default(now()) @map("created_at")
+  updatedAt           DateTime @updatedAt @map("updated_at")
+
+  @@index([alias])
+  @@index([isActive])
+  @@map("model_aliases")
+}

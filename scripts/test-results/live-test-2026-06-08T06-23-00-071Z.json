@@ -1,0 +1,105 @@
+{
+  "timestamp": "2026-06-08T06:23:00.073Z",
+  "results": [
+    {
+      "alias": "coder-fast",
+      "mode": "non-stream",
+      "ok": false,
+      "status": 401,
+      "latency": 871,
+      "content": "",
+      "error": "Invalid API key format"
+    },
+    {
+      "alias": "coder-fast",
+      "mode": "stream",
+      "ok": false,
+      "status": 401,
+      "latency": 74,
+      "firstChunkMs": 75,
+      "content": "",
+      "chunks": 1,
+      "error": "HTTP 401"
+    },
+    {
+      "alias": "coder-smart",
+      "mode": "non-stream",
+      "ok": false,
+      "status": 401,
+      "latency": 57,
+      "content": "",
+      "error": "Invalid API key format"
+    },
+    {
+      "alias": "coder-smart",
+      "mode": "stream",
+      "ok": false,
+      "status": 401,
+      "latency": 56,
+      "firstChunkMs": 57,
+      "content": "",
+      "chunks": 1,
+      "error": "HTTP 401"
+    },
+    {
+      "alias": "reasoning",
+      "mode": "non-stream",
+      "ok": false,
+      "status": 401,
+      "latency": 78,
+      "content": "",
+      "error": "Invalid API key format"
+    },
+    {
+      "alias": "reasoning",
+      "mode": "stream",
+      "ok": false,
+      "status": 401,
+      "latency": 45,
+      "firstChunkMs": 46,
+      "content": "",
+      "chunks": 1,
+      "error": "HTTP 401"
+    },
+    {
+      "alias": "architect",
+      "mode": "non-stream",
+      "ok": false,
+      "status": 401,
+      "latency": 54,
+      "content": "",
+      "error": "Invalid API key format"
+    },
+    {
+      "alias": "architect",
+      "mode": "stream",
+      "ok": false,
+      "status": 401,
+      "latency": 52,
+      "firstChunkMs": 52,
+      "content": "",
+      "chunks": 1,
+      "error": "HTTP 401"
+    },
+    {
+      "alias": "deep-research",
+      "mode": "non-stream",
+      "ok": false,
+      "status": 401,
+      "latency": 52,
+      "content": "",
+      "error": "Invalid API key format"
+    },
+    {
+      "alias": "deep-research",
+      "mode": "stream",
+      "ok": false,
+      "status": 401,
+      "latency": 63,
+      "firstChunkMs": 63,
+      "content": "",
+      "chunks": 1,
+      "error": "HTTP 401"
+    }
+  ]
+}

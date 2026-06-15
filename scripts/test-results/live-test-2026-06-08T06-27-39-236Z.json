@@ -1,0 +1,97 @@
+{
+  "timestamp": "2026-06-08T06:27:39.238Z",
+  "results": [
+    {
+      "alias": "coder-fast",
+      "mode": "non-stream",
+      "ok": false,
+      "status": 500,
+      "latency": 14465,
+      "content": "",
+      "error": "Failed to route request: \nInvalid `prisma.provider.findUnique()` invocation:\n\n\nCan't reach database server at `aws-1-ap-northeast-2.pooler.supabase.com:6543`\n\nPlease make sure your database server is running at `aws-1-ap-northeast-2.pooler.supabase.com:6543`."
+    },
+    {
+      "alias": "coder-fast",
+      "mode": "stream",
+      "ok": false,
+      "status": 500,
+      "latency": 5674,
+      "firstChunkMs": 0,
+      "content": "",
+      "chunks": 0,
+      "error": "HTTP 500"
+    },
+    {
+      "alias": "coder-smart",
+      "mode": "non-stream",
+      "ok": false,
+      "latency": 30003,
+      "error": "This operation was aborted"
+    },
+    {
+      "alias": "coder-smart",
+      "mode": "stream",
+      "ok": false,
+      "status": 500,
+      "latency": 18041,
+      "firstChunkMs": 0,
+      "content": "",
+      "chunks": 0,
+      "error": "HTTP 500"
+    },
+    {
+      "alias": "reasoning",
+      "mode": "non-stream",
+      "ok": false,
+      "latency": 20085,
+      "error": "Unexpected end of JSON input"
+    },
+    {
+      "alias": "reasoning",
+      "mode": "stream",
+      "ok": false,
+      "status": 500,
+      "latency": 38188,
+      "firstChunkMs": 0,
+      "content": "",
+      "chunks": 0,
+      "error": "HTTP 500"
+    },
+    {
+      "alias": "architect",
+      "mode": "non-stream",
+      "ok": false,
+      "latency": 20210,
+      "error": "Unexpected end of JSON input"
+    },
+    {
+      "alias": "architect",
+      "mode": "stream",
+      "ok": false,
+      "status": 500,
+      "latency": 18222,
+      "firstChunkMs": 0,
+      "content": "",
+      "chunks": 0,
+      "error": "HTTP 500"
+    },
+    {
+      "alias": "deep-research",
+      "mode": "non-stream",
+      "ok": false,
+      "latency": 17723,
+      "error": "Unexpected end of JSON input"
+    },
+    {
+      "alias": "deep-research",
+      "mode": "stream",
+      "ok": false,
+      "status": 500,
+      "latency": 16237,
+      "firstChunkMs": 0,
+      "content": "",
+      "chunks": 0,
+      "error": "HTTP 500"
+    }
+  ]
+}

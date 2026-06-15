@@ -1,0 +1,230 @@
+{
+  "timestamp": "2026-06-08T07:05:31.259Z",
+  "gatewayUrl": "http://localhost:3000",
+  "summary": {
+    "totalTests": 20,
+    "passed": 9,
+    "failed": 11,
+    "phases": 4
+  },
+  "phases": [
+    {
+      "name": "Phase 1: Normal Routing",
+      "scenario": "All providers enabled",
+      "results": [
+        {
+          "alias": "coder-fast",
+          "status": "FAIL",
+          "error": "This operation was aborted",
+          "latencyMs": 15003,
+          "timestamp": "2026-06-08T07:00:57.352Z"
+        },
+        {
+          "alias": "coder-smart",
+          "status": "FAIL",
+          "error": "This operation was aborted",
+          "latencyMs": 15001,
+          "timestamp": "2026-06-08T07:01:12.854Z"
+        },
+        {
+          "alias": "reasoning",
+          "status": "FAIL",
+          "error": "All providers failed after 2 attempts. Last error: Provider ollama is unreachable",
+          "latencyMs": 19261,
+          "timestamp": "2026-06-08T07:01:32.620Z"
+        },
+        {
+          "alias": "architect",
+          "status": "PASS",
+          "provider": "architect",
+          "content": "<think>\nOkay, the user wants me to just reply with one word: \"ok\". Let me make sure I understand correctly. They said \"just reply with one word: ok\". So they want the response to be exactly the word \"ok\" and nothing else. I need to check if there's any hidden instruction or if they're testing my compliance. Since the query is straightforward, the best approach is to follow the instruction precisely. No need for extra text or explanations. Just output \"ok\". Let me confirm once again. The user might be checking if I can adhere to simple commands or maybe they're in a hurry. Either way, the response is clear. Alright, I'll generate the single word \"ok\".\n</think>\n\nok",
+          "latencyMs": 13935,
+          "usage": {
+            "prompt_tokens": 15,
+            "completion_tokens": 150,
+            "total_tokens": 165
+          },
+          "timestamp": "2026-06-08T07:01:47.057Z"
+        },
+        {
+          "alias": "deep-research",
+          "status": "PASS",
+          "provider": "deep-research",
+          "content": "ok",
+          "latencyMs": 13167,
+          "usage": {
+            "prompt_tokens": 17,
+            "completion_tokens": 2,
+            "total_tokens": 19
+          },
+          "timestamp": "2026-06-08T07:02:00.727Z"
+        }
+      ]
+    },
+    {
+      "name": "Phase 2: Failover",
+      "scenario": "Groq + Gemini disabled",
+      "results": [
+        {
+          "alias": "coder-fast",
+          "status": "FAIL",
+          "error": "This operation was aborted",
+          "latencyMs": 15003,
+          "timestamp": "2026-06-08T07:02:20.378Z"
+        },
+        {
+          "alias": "coder-smart",
+          "status": "FAIL",
+          "error": "This operation was aborted",
+          "latencyMs": 15003,
+          "timestamp": "2026-06-08T07:02:35.883Z"
+        },
+        {
+          "alias": "reasoning",
+          "status": "PASS",
+          "provider": "reasoning",
+          "content": "ok",
+          "latencyMs": 13195,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 17,
+            "total_tokens": 29
+          },
+          "timestamp": "2026-06-08T07:02:49.581Z"
+        },
+        {
+          "alias": "architect",
+          "status": "PASS",
+          "provider": "architect",
+          "content": "ok",
+          "latencyMs": 13746,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 103,
+            "total_tokens": 115
+          },
+          "timestamp": "2026-06-08T07:03:03.829Z"
+        },
+        {
+          "alias": "deep-research",
+          "status": "PASS",
+          "provider": "deep-research",
+          "content": "ok",
+          "latencyMs": 12402,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 98,
+            "total_tokens": 110
+          },
+          "timestamp": "2026-06-08T07:03:16.733Z"
+        }
+      ]
+    },
+    {
+      "name": "Phase 3: Extreme Failover",
+      "scenario": "OpenRouter only",
+      "results": [
+        {
+          "alias": "coder-fast",
+          "status": "FAIL",
+          "error": "Failed to route request: No eligible provider found for request",
+          "latencyMs": 6952,
+          "timestamp": "2026-06-08T07:03:29.996Z"
+        },
+        {
+          "alias": "coder-smart",
+          "status": "FAIL",
+          "error": "Failed to route request: No eligible provider found for request",
+          "latencyMs": 6292,
+          "timestamp": "2026-06-08T07:03:36.790Z"
+        },
+        {
+          "alias": "reasoning",
+          "status": "FAIL",
+          "error": "Failed to route request: No eligible provider found for request",
+          "latencyMs": 6319,
+          "timestamp": "2026-06-08T07:03:43.613Z"
+        },
+        {
+          "alias": "architect",
+          "status": "FAIL",
+          "error": "Failed to route request: No eligible provider found for request",
+          "latencyMs": 5886,
+          "timestamp": "2026-06-08T07:03:50.001Z"
+        },
+        {
+          "alias": "deep-research",
+          "status": "FAIL",
+          "error": "Failed to route request: No eligible provider found for request",
+          "latencyMs": 6262,
+          "timestamp": "2026-06-08T07:03:56.765Z"
+        }
+      ]
+    },
+    {
+      "name": "Phase 4: Single Provider",
+      "scenario": "Cerebras only",
+      "results": [
+        {
+          "alias": "coder-fast",
+          "status": "PASS",
+          "provider": "coder-fast",
+          "content": "ok",
+          "latencyMs": 14545,
+          "usage": {
+            "prompt_tokens": 74,
+            "completion_tokens": 26,
+            "total_tokens": 100
+          },
+          "timestamp": "2026-06-08T07:04:17.795Z"
+        },
+        {
+          "alias": "coder-smart",
+          "status": "FAIL",
+          "error": "This operation was aborted",
+          "latencyMs": 15002,
+          "timestamp": "2026-06-08T07:04:33.298Z"
+        },
+        {
+          "alias": "reasoning",
+          "status": "PASS",
+          "provider": "reasoning",
+          "content": "ok",
+          "latencyMs": 14506,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 14,
+            "total_tokens": 26
+          },
+          "timestamp": "2026-06-08T07:04:48.306Z"
+        },
+        {
+          "alias": "architect",
+          "status": "PASS",
+          "provider": "architect",
+          "content": "ok",
+          "latencyMs": 15478,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 52,
+            "total_tokens": 64
+          },
+          "timestamp": "2026-06-08T07:05:04.286Z"
+        },
+        {
+          "alias": "deep-research",
+          "status": "PASS",
+          "provider": "deep-research",
+          "content": "ok",
+          "latencyMs": 13886,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 23,
+            "total_tokens": 35
+          },
+          "timestamp": "2026-06-08T07:05:18.672Z"
+        }
+      ]
+    }
+  ]
+}

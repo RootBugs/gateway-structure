@@ -1,0 +1,296 @@
+{
+  "timestamp": "2026-06-08T08:02:37.201Z",
+  "gatewayUrl": "http://localhost:3000",
+  "summary": {
+    "totalTests": 20,
+    "passed": 20,
+    "failed": 0,
+    "phases": 4
+  },
+  "phases": [
+    {
+      "name": "Phase 1: Normal Routing",
+      "scenario": "All providers enabled",
+      "results": [
+        {
+          "alias": "coder-fast",
+          "status": "PASS",
+          "provider": "coder-fast",
+          "content": "ok",
+          "latencyMs": 11916,
+          "usage": {
+            "prompt_tokens": 42,
+            "completion_tokens": 2,
+            "total_tokens": 44
+          },
+          "timestamp": "2026-06-08T07:59:41.253Z"
+        },
+        {
+          "alias": "coder-smart",
+          "status": "PASS",
+          "provider": "coder-smart",
+          "content": "ok",
+          "latencyMs": 6299,
+          "usage": {
+            "prompt_tokens": 17,
+            "completion_tokens": 2,
+            "total_tokens": 19
+          },
+          "timestamp": "2026-06-08T07:59:48.053Z"
+        },
+        {
+          "alias": "reasoning",
+          "status": "PASS",
+          "provider": "reasoning",
+          "content": "<think>\nOkay, the user wants me to just reply with one word: \"ok\". Let me make sure I'm not adding anything else. They specified \"just reply with one word\" so I should only say \"ok\" without any extra text. I need to check if there are any other requirements mentioned. No, the instruction is straightforward. Just confirm that the response is exactly \"ok\" as a single word. Alright, ready to respond.\n</think>\n\nok",
+          "latencyMs": 6224,
+          "usage": {
+            "prompt_tokens": 15,
+            "completion_tokens": 95,
+            "total_tokens": 110
+          },
+          "timestamp": "2026-06-08T07:59:54.779Z"
+        },
+        {
+          "alias": "architect",
+          "status": "PASS",
+          "provider": "architect",
+          "content": "<think>\nOkay, the user wants me to reply with just one word: \"ok\". Let me make sure I understand correctly. They said, \"just reply with one word: ok\". So the task is to respond with the word \"ok\" and nothing else.\n\nFirst, I need to check if there's any hidden instruction or if they want confirmation in a specific way. But the message seems straightforward. They want a single-word response. Maybe they're testing if I follow instructions precisely. Sometimes users use such commands to check if the AI adheres to their guidelines. \n\nI should also consider if there's a typo or if they meant something else, but \"ok\" is a valid word. No other context is given, so there's no need to overcomplicate. Just respond exactly as they asked. \n\nAnother angle is to make sure that I'm not adding any extra characters or formatting. The user might be in a situation where they need a quick, unambiguous response. Perhaps they're using this in an automated process or a script that requires a specific single-word confirmation. \n\nI'll confirm once more: the user's message is a command to reply with one word: \"ok\". So the correct action is to output \"ok\" without any additional text",
+          "latencyMs": 8234,
+          "usage": {
+            "prompt_tokens": 15,
+            "completion_tokens": 256,
+            "total_tokens": 271
+          },
+          "timestamp": "2026-06-08T08:00:03.515Z"
+        },
+        {
+          "alias": "deep-research",
+          "status": "PASS",
+          "provider": "deep-research",
+          "content": "ok",
+          "latencyMs": 5885,
+          "usage": {
+            "prompt_tokens": 17,
+            "completion_tokens": 2,
+            "total_tokens": 19
+          },
+          "timestamp": "2026-06-08T08:00:09.900Z"
+        }
+      ]
+    },
+    {
+      "name": "Phase 2: Failover",
+      "scenario": "Groq + Gemini disabled",
+      "results": [
+        {
+          "alias": "coder-fast",
+          "status": "PASS",
+          "provider": "coder-fast",
+          "content": "ok",
+          "latencyMs": 7317,
+          "usage": {
+            "prompt_tokens": 74,
+            "completion_tokens": 51,
+            "total_tokens": 125
+          },
+          "timestamp": "2026-06-08T08:00:20.853Z"
+        },
+        {
+          "alias": "coder-smart",
+          "status": "PASS",
+          "provider": "coder-smart",
+          "content": "ok",
+          "latencyMs": 6490,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 92,
+            "total_tokens": 104
+          },
+          "timestamp": "2026-06-08T08:00:27.846Z"
+        },
+        {
+          "alias": "reasoning",
+          "status": "PASS",
+          "provider": "reasoning",
+          "content": "ok",
+          "latencyMs": 7423,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 86,
+            "total_tokens": 98
+          },
+          "timestamp": "2026-06-08T08:00:35.770Z"
+        },
+        {
+          "alias": "architect",
+          "status": "PASS",
+          "provider": "architect",
+          "content": "ok",
+          "latencyMs": 11908,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 144,
+            "total_tokens": 156
+          },
+          "timestamp": "2026-06-08T08:00:48.181Z"
+        },
+        {
+          "alias": "deep-research",
+          "status": "PASS",
+          "provider": "deep-research",
+          "content": "ok",
+          "latencyMs": 8354,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 82,
+            "total_tokens": 94
+          },
+          "timestamp": "2026-06-08T08:00:57.036Z"
+        }
+      ]
+    },
+    {
+      "name": "Phase 3: Extreme Failover",
+      "scenario": "OpenRouter only",
+      "results": [
+        {
+          "alias": "coder-fast",
+          "status": "PASS",
+          "provider": "coder-fast",
+          "content": "ok",
+          "latencyMs": 6811,
+          "usage": {
+            "prompt_tokens": 74,
+            "completion_tokens": 50,
+            "total_tokens": 124
+          },
+          "timestamp": "2026-06-08T08:01:10.623Z"
+        },
+        {
+          "alias": "coder-smart",
+          "status": "PASS",
+          "provider": "coder-smart",
+          "content": "ok",
+          "latencyMs": 6891,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 78,
+            "total_tokens": 90
+          },
+          "timestamp": "2026-06-08T08:01:18.016Z"
+        },
+        {
+          "alias": "reasoning",
+          "status": "PASS",
+          "provider": "reasoning",
+          "content": "ok",
+          "latencyMs": 6554,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 16,
+            "total_tokens": 28
+          },
+          "timestamp": "2026-06-08T08:01:25.070Z"
+        },
+        {
+          "alias": "architect",
+          "status": "PASS",
+          "provider": "architect",
+          "content": "ok",
+          "latencyMs": 9586,
+          "usage": {
+            "prompt_tokens": 108,
+            "completion_tokens": 2,
+            "total_tokens": 110
+          },
+          "timestamp": "2026-06-08T08:01:35.157Z"
+        },
+        {
+          "alias": "deep-research",
+          "status": "PASS",
+          "provider": "deep-research",
+          "content": "ok",
+          "latencyMs": 8951,
+          "usage": {
+            "prompt_tokens": 108,
+            "completion_tokens": 2,
+            "total_tokens": 110
+          },
+          "timestamp": "2026-06-08T08:01:44.608Z"
+        }
+      ]
+    },
+    {
+      "name": "Phase 4: Single Provider",
+      "scenario": "Cerebras only",
+      "results": [
+        {
+          "alias": "coder-fast",
+          "status": "PASS",
+          "provider": "coder-fast",
+          "content": "Ok",
+          "latencyMs": 8203,
+          "usage": {
+            "prompt_tokens": 14,
+            "completion_tokens": 2,
+            "total_tokens": 16
+          },
+          "timestamp": "2026-06-08T08:01:58.558Z"
+        },
+        {
+          "alias": "coder-smart",
+          "status": "PASS",
+          "provider": "coder-smart",
+          "content": "ok",
+          "latencyMs": 8079,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 221,
+            "total_tokens": 233
+          },
+          "timestamp": "2026-06-08T08:02:07.138Z"
+        },
+        {
+          "alias": "reasoning",
+          "status": "PASS",
+          "provider": "reasoning",
+          "content": "ok",
+          "latencyMs": 6521,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 53,
+            "total_tokens": 65
+          },
+          "timestamp": "2026-06-08T08:02:14.159Z"
+        },
+        {
+          "alias": "architect",
+          "status": "PASS",
+          "provider": "architect",
+          "content": "ok",
+          "latencyMs": 6627,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 187,
+            "total_tokens": 199
+          },
+          "timestamp": "2026-06-08T08:02:21.287Z"
+        },
+        {
+          "alias": "deep-research",
+          "status": "PASS",
+          "provider": "deep-research",
+          "content": "ok",
+          "latencyMs": 6685,
+          "usage": {
+            "prompt_tokens": 12,
+            "completion_tokens": 122,
+            "total_tokens": 134
+          },
+          "timestamp": "2026-06-08T08:02:28.472Z"
+        }
+      ]
+    }
+  ]
+}
